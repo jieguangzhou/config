@@ -362,7 +362,7 @@ Plug 'liuchengxu/vista.vim'
 Plug 'dense-analysis/ale'
 
 " Auto Complete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Isort
 "Plug 'stsewd/isort.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -407,6 +407,18 @@ Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
 Plug 'tweekmonster/braceless.vim'
 Plug 'bfredl/nvim-ipy', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:deoplete#enable_at_startup = 1
+
+Plug 'zchee/deoplete-jedi'
+
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+
+Plug 'neomake/neomake'
+let g:neomake_python_enabled_makers = ['pylint']
+" call neomake#configure#automake('nrwi', 500)
 
 " Plug 'julienr/vim-cellmode'
 
@@ -469,6 +481,18 @@ Plug 'rbgrouleff/bclose.vim' " For ranger.vim
 
 " tmux
 Plug 'roxma/vim-tmux-clipboard'
+
+" go-to
+Plug 'davidhalter/jedi-vim'
+" disable autocompletion, cause we use deoplete for completion
+let g:jedi#completions_enabled = 0
+
+" open the go-to function in split, not another buffer
+let g:jedi#use_splits_not_buffers = "right"
+
+Plug 'scrooloose/nerdcommenter'
+
+
 
 call plug#end()
 
@@ -587,7 +611,8 @@ let NERDTreeMapOpenInTab = "O"
 let NERDTreeMapChangeRoot = "r"
 let NERDTreeMapMenu = "m"
 let NERDTreeMapToggleHidden = "zh"
-
+let NERDTreeIgnore = ['\.pyc$', '__pycache__', '.idea']
+let g:NERDTreeHidden=0
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
 	exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
 	exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
@@ -662,44 +687,44 @@ let g:NERDTreeIndicatorMapCustom = {
 			\ "Unknown"	 : "?"
 			\ }
 
-
-" ===
-" === coc
-" ===
-" fix the most annoying bug that coc has
-silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-emmet', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-omnisharp', 'coc-snippets']
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-
-" use <tab> for trigger completion and navigate to the next complete item
-function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]	=~ '\s'
-endfunction
-inoremap <silent><expr> <Tab>
-			\ pumvisible() ? "\<C-n>" :
-			\ <SID>check_back_space() ? "\<Tab>" :
-			\ coc#refresh()
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <silent><expr> <c-space> coc#refresh()
-" Useful commands
-nmap <silent> <leader>y :<C-u>CocList -A --normal yank<cr>
-nmap <silent> <leader>e :<C-u>CocList -A --normal locationlist<cr>
-nmap <silent> <leader>g <Plug>(coc-definition)
-nmap <silent> <leader>d <Plug>(coc-type-definition)
-nmap <silent> <leader>i <Plug>(coc-implementation)
-nmap <silent> <leader>n <Plug>(coc-references)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+" 
+" " ===
+" " === coc
+" " ===
+" " fix the most annoying bug that coc has
+" silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
+" let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-emmet', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-omnisharp', 'coc-snippets']
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" 
+" 
+" " use <tab> for trigger completion and navigate to the next complete item
+" function! s:check_back_space() abort
+" 	let col = col('.') - 1
+" 	return !col || getline('.')[col - 1]	=~ '\s'
+" endfunction
+" inoremap <silent><expr> <Tab>
+" 			\ pumvisible() ? "\<C-n>" :
+" 			\ <SID>check_back_space() ? "\<Tab>" :
+" 			\ coc#refresh()
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <silent><expr> <c-space> coc#refresh()
+" " Useful commands
+" nmap <silent> <leader>y :<C-u>CocList -A --normal yank<cr>
+" nmap <silent> <leader>e :<C-u>CocList -A --normal locationlist<cr>
+" nmap <silent> <leader>g <Plug>(coc-definition)
+" nmap <silent> <leader>d <Plug>(coc-type-definition)
+" nmap <silent> <leader>i <Plug>(coc-implementation)
+" nmap <silent> <leader>n <Plug>(coc-references)
+" 
+" " Use K to show documentation in preview window
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
 
 
 " ===
@@ -1104,6 +1129,12 @@ nmap f <Plug>(easymotion-overwin-f)
 nnoremap <LEADER>w :w<CR>
 nnoremap <LEADER>q :q<CR>
 nnoremap <LEADER>qw :qw<CR>
+nnoremap <LEADER>0 :source ~/.config/nvim/init.vim<CR>
+
+nnoremap <LEADER>y "+y
+nnoremap <LEADER>p "+gp
+
+
 
 " ===================== End of Plugin Settings =====================
 
@@ -1117,3 +1148,31 @@ if has_machine_specific_file == 0
 	exec "e ~/.config/nvim/_machine_specific.vim"
 endif
 
+map <F5> :call CompileRunGcc()<CR>
+    func! CompileRunGcc()
+        exec "w"
+if &filetype == 'c'
+            exec "!g++ % -o %<"
+            exec "!time ./%<"
+elseif &filetype == 'cpp'
+            exec "!g++ % -o %<"
+            exec "!time ./%<"
+elseif &filetype == 'java'
+            exec "!javac %"
+            exec "!time java %<"
+elseif &filetype == 'sh'
+            :!time bash %
+elseif &filetype == 'python'
+            exec "!time python %"
+elseif &filetype == 'html'
+            exec "!firefox % &"
+elseif &filetype == 'go'
+    "        exec "!go build %<"
+            exec "!time go run %"
+elseif &filetype == 'mkd'
+            exec "!~/.vim/markdown.pl % > %.html &"
+            exec "!firefox %.html &"
+endif
+    endfunc
+		 
+		 
