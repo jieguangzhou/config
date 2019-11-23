@@ -92,6 +92,10 @@ set colorcolumn=80
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+
 " ===
 " === Terminal Behavior
 " ===
@@ -442,6 +446,17 @@ Plug 'easymotion/vim-easymotion'
 " Formatter
 Plug 'Chiel92/vim-autoformat'
 
+Plug 'sbdchd/neoformat'
+" Enable alignment
+let g:neoformat_basic_format_align = 1
+
+" Enable tab to spaces conversion
+let g:neoformat_basic_format_retab = 1
+
+" Enable trimmming of trailing whitespace
+let g:neoformat_basic_format_trim = 1
+
+
 " For general writing
 Plug 'reedes/vim-wordy'
 Plug 'ron89/thesaurus_query.vim'
@@ -488,7 +503,7 @@ Plug 'davidhalter/jedi-vim'
 let g:jedi#completions_enabled = 0
 
 " open the go-to function in split, not another buffer
-let g:jedi#use_splits_not_buffers = "right"
+let g:jedi#use_splits_not_buffers = ""
 
 Plug 'scrooloose/nerdcommenter'
 
@@ -1027,7 +1042,8 @@ let g:go_highlight_variable_declarations     = 0
 " ===
 " === AutoFormat
 " ===
-nnoremap <C-y> :Autoformat<CR>
+" nnoremap <C-y> :Autoformat<CR>
+nnoremap <C-y> :Neoformat<CR>
 
 " ===
 " === OmniSharp
