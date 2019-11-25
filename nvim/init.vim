@@ -411,6 +411,10 @@ Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
 Plug 'tweekmonster/braceless.vim'
 Plug 'bfredl/nvim-ipy', { 'do': ':UpdateRemotePlugins' }
+
+Plug 'heavenshell/vim-pydocstring'
+let g:pydocstring_enable_mapping = 0
+
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
 
@@ -427,7 +431,7 @@ let g:neomake_python_enabled_makers = ['pylint']
 " Plug 'julienr/vim-cellmode'
 
 " Markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 Plug 'dkarter/bullets.vim', { 'for' :['markdown', 'vim-plug'] }
 
@@ -784,7 +788,7 @@ let g:mkdp_markdown_css = ''
 let g:mkdp_highlight_css = ''
 let g:mkdp_port = ''
 let g:mkdp_page_title = '「${name}」'
-
+let g:mkdp_browser = ''
 
 " ===
 " === Python-syntax
@@ -1150,7 +1154,13 @@ nnoremap <LEADER>0 :source ~/.config/nvim/init.vim<CR>
 nnoremap <LEADER>y "+y
 nnoremap <LEADER>p "+gp
 
+nmap <Leader>jf :%!python -m json.tool<CR>
 
+
+nmap <S-h> ^
+nmap <S-l> $
+
+nmap <C-/> :Pydocstring
 
 " ===================== End of Plugin Settings =====================
 
