@@ -743,7 +743,7 @@ let g:NERDTreeIndicatorMapCustom = {
 "   else
 "     call CocAction('doHover')
 "   endif
-" endfunction
+"/ endfunction
 
 
 " ===
@@ -1160,7 +1160,7 @@ nmap <Leader>jf :%!python -m json.tool<CR>
 nmap <S-h> ^
 nmap <S-l> $
 
-nmap <C-/> :Pydocstring
+nnoremap <LEADER>" :Pydocstring<CR>
 
 " ===================== End of Plugin Settings =====================
 
