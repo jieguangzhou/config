@@ -113,7 +113,7 @@ noremap ; :
 
 " Save & quit
 noremap Q :q<CR>
-" noremap S :w<CR>
+noremap S :w<CR>
 
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
@@ -1146,9 +1146,9 @@ nmap f <Plug>(easymotion-overwin-f)
 
 
 " 自定义快捷键
-nnoremap <LEADER>w :w<CR>
-nnoremap <LEADER>q :q<CR>
-nnoremap <LEADER>qw :qw<CR>
+noremap <LEADER>w :w<CR>
+noremap <LEADER>q :q<CR>
+noremap <LEADER>qw :qw<CR>
 nnoremap <LEADER>0 :source ~/.config/nvim/init.vim<CR>
 
 nnoremap <LEADER>y "+y
