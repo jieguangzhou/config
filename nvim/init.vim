@@ -411,6 +411,8 @@ Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
 Plug 'tweekmonster/braceless.vim'
 Plug 'bfredl/nvim-ipy', { 'do': ':UpdateRemotePlugins' }
+let g:nvim_ipy_perform_mappings = 0
+map <silent> <c-s> <Plug>(IPy-Run)
 
 Plug 'heavenshell/vim-pydocstring'
 let g:pydocstring_enable_mapping = 0
@@ -1151,8 +1153,8 @@ noremap <LEADER>q :q<CR>
 noremap <LEADER>qw :qw<CR>
 nnoremap <LEADER>0 :source ~/.config/nvim/init.vim<CR>
 
-nnoremap <LEADER>y "+y
-nnoremap <LEADER>p "+gp
+noremap <LEADER>y "+y
+noremap <LEADER>p "+gp
 
 nmap <Leader>jf :%!python -m json.tool<CR>
 
