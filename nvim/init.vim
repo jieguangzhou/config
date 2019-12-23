@@ -366,7 +366,7 @@ Plug 'liuchengxu/vista.vim'
 Plug 'dense-analysis/ale'
 
 " Auto Complete
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 
 " Isort
 "Plug 'stsewd/isort.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -414,16 +414,16 @@ Plug 'bfredl/nvim-ipy', { 'do': ':UpdateRemotePlugins' }
 let g:nvim_ipy_perform_mappings = 0
 map <silent> <c-s> <Plug>(IPy-Run)
 
-Plug 'heavenshell/vim-pydocstring'
-let g:pydocstring_enable_mapping = 0
-
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-let g:deoplete#enable_at_startup = 1
-
-Plug 'zchee/deoplete-jedi'
-
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+"Plug 'heavenshell/vim-pydocstring'
+"let g:pydocstring_enable_mapping = 0
+"
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"let g:deoplete#enable_at_startup = 1
+"
+"Plug 'zchee/deoplete-jedi'
+"
+"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 
 Plug 'neomake/neomake'
@@ -708,44 +708,44 @@ let g:NERDTreeIndicatorMapCustom = {
 			\ "Unknown"	 : "?"
 			\ }
 
-" 
-" " ===
-" " === coc
-" " ===
-" " fix the most annoying bug that coc has
-" silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-" let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-emmet', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-omnisharp', 'coc-snippets']
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-" 
-" 
-" " use <tab> for trigger completion and navigate to the next complete item
-" function! s:check_back_space() abort
-" 	let col = col('.') - 1
-" 	return !col || getline('.')[col - 1]	=~ '\s'
-" endfunction
-" inoremap <silent><expr> <Tab>
-" 			\ pumvisible() ? "\<C-n>" :
-" 			\ <SID>check_back_space() ? "\<Tab>" :
-" 			\ coc#refresh()
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <silent><expr> <c-space> coc#refresh()
-" " Useful commands
-" nmap <silent> <leader>y :<C-u>CocList -A --normal yank<cr>
-" nmap <silent> <leader>e :<C-u>CocList -A --normal locationlist<cr>
-" nmap <silent> <leader>g <Plug>(coc-definition)
-" nmap <silent> <leader>d <Plug>(coc-type-definition)
-" nmap <silent> <leader>i <Plug>(coc-implementation)
-" nmap <silent> <leader>n <Plug>(coc-references)
-" 
-" " Use K to show documentation in preview window
-" nnoremap <silent> K :call <SID>show_documentation()<CR>
-" function! s:show_documentation()
-"   if (index(['vim','help'], &filetype) >= 0)
-"     execute 'h '.expand('<cword>')
-"   else
-"     call CocAction('doHover')
-"   endif
-"/ endfunction
+
+" ===
+" === coc
+" ===
+" fix the most annoying bug that coc has
+silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-emmet', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-omnisharp', 'coc-snippets']
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]	=~ '\s'
+endfunction
+inoremap <silent><expr> <Tab>
+			\ pumvisible() ? "\<C-n>" :
+			\ <SID>check_back_space() ? "\<Tab>" :
+			\ coc#refresh()
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <silent><expr> <c-space> coc#refresh()
+" Useful commands
+nmap <silent> <leader>y :<C-u>CocList -A --normal yank<cr>
+nmap <silent> <leader>e :<C-u>CocList -A --normal locationlist<cr>
+nmap <silent> <leader>g <Plug>(coc-definition)
+nmap <silent> <leader>d <Plug>(coc-type-definition)
+nmap <silent> <leader>i <Plug>(coc-implementation)
+nmap <silent> <leader>n <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+ endfunction
 
 
 " ===
