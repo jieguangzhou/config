@@ -168,16 +168,16 @@ noremap <silent> <LEADER>o za
 " U/E keys for 5 times u/e (faster navigation)
 " noremap <silent> U 5k
 " noremap <silent> E 5j
-" 
+"
 " " N key: go to the start of the line
 " noremap <silent> N 0
 " " I key: go to the end of the line
 " noremap <silent> I $
-" 
+"
 " " Faster in-line navigation
 " noremap W 5w
 " noremap B 5b
-" 
+"
 " " set h (same as n, cursor left) to 'end of word'
 " noremap h e
 
@@ -219,11 +219,11 @@ noremap <right> :vertical resize+5<CR>
 " noremap sh <C-w>t<C-w>K
 " " Place the two screens side by side
 " noremap sv <C-w>t<C-w>H
-" 
+"
 " " Rotate screens
 " noremap srh <C-w>b<C-w>K
 " noremap srv <C-w>b<C-w>H
-" 
+"
 " " Press <SPACE> + q to close the window below the current window
 " noremap <LEADER>q <C-w>j:q<CR>
 
@@ -414,8 +414,8 @@ Plug 'bfredl/nvim-ipy', { 'do': ':UpdateRemotePlugins' }
 let g:nvim_ipy_perform_mappings = 0
 map <silent> <c-s> <Plug>(IPy-Run)
 
-"Plug 'heavenshell/vim-pydocstring'
-"let g:pydocstring_enable_mapping = 0
+Plug 'heavenshell/vim-pydocstring'
+let g:pydocstring_enable_mapping = 0
 "
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "let g:deoplete#enable_at_startup = 1
@@ -504,12 +504,12 @@ Plug 'rbgrouleff/bclose.vim' " For ranger.vim
 Plug 'roxma/vim-tmux-clipboard'
 
 " go-to
-Plug 'davidhalter/jedi-vim'
-" disable autocompletion, cause we use deoplete for completion
-let g:jedi#completions_enabled = 0
-
-" open the go-to function in split, not another buffer
-let g:jedi#use_splits_not_buffers = ""
+" Plug 'davidhalter/jedi-vim'
+" " disable autocompletion, cause we use deoplete for completion
+" let g:jedi#completions_enabled = 0
+"
+" " open the go-to function in split, not another buffer
+" let g:jedi#use_splits_not_buffers = ""
 
 Plug 'scrooloose/nerdcommenter'
 
@@ -531,7 +531,7 @@ source ~/.config/nvim/_machine_specific.vim
 
 
 " hi Search ctermbg=lightyellow ctermfg=red
-nnoremap <silent> <leader>h :set hlsearch! hlsearch?<CR> 
+nnoremap <silent> <leader>h :set hlsearch! hlsearch?<CR>
 
 " ===
 " === Dress up my vim
@@ -714,7 +714,7 @@ let g:NERDTreeIndicatorMapCustom = {
 " ===
 " fix the most annoying bug that coc has
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-emmet', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-omnisharp', 'coc-snippets']
+let g:coc_global_extensions = ['coc-python', 'coc-pyls', 'coc-tabnine', 'coc-vimlsp', 'coc-emmet', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-omnisharp', 'coc-snippets']
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 
@@ -746,6 +746,21 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
  endfunction
+
+" snippets
+
+inoremap <silent><expr> <C><CR>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" let g:coc_snippet_next = '<tab>'
 
 
 " ===
@@ -883,11 +898,11 @@ let g:NERDCreateDefaultMappings = 0
 
 " Startify
 " let g:startify_lists = [
-" 			\ { 'type': 'files',		 'header': ['	 MRU']						},
-" 			\ { 'type': 'bookmarks', 'header': ['	 Bookmarks']			},
-" 			\ { 'type': 'commands',	'header': ['	 Commands']			 },
-" 			\ ]
-" 
+"				\ { 'type': 'files',		 'header': ['	 MRU']						},
+"				\ { 'type': 'bookmarks', 'header': ['	 Bookmarks']			},
+"				\ { 'type': 'commands',	'header': ['	 Commands']			 },
+"				\ ]
+"
 
 " ===
 " === Far.vim
@@ -969,7 +984,7 @@ let g:vimtex_mappings_enabled = 0
 let g:vimtex_text_obj_enabled = 0
 let g:vimtex_motion_enabled = 0
 let maplocalleader=' '
-" let g:vimtex_compiler_progname = 'nvr' 
+" let g:vimtex_compiler_progname = 'nvr'
 
 set pastetoggle=<F12>
 " ===
@@ -1202,5 +1217,5 @@ elseif &filetype == 'mkd'
             exec "!firefox %.html &"
 endif
     endfunc
-		 
-		 
+
+
