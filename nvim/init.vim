@@ -150,6 +150,7 @@ noremap <LEADER>tt :%s/    /\t/g
 " Folding
 noremap <silent> <LEADER>o za
 
+noremap <silent> <LEADER>v viw
 
 " ===
 " === Cursor Movement
