@@ -1169,6 +1169,7 @@ nmap <S-h> ^
 nmap <S-l> $
 
 nnoremap <LEADER>" :Pydocstring<CR>
+nnoremap <esc> :nohl<cr>
 
 " ===================== End of Plugin Settings =====================
 
