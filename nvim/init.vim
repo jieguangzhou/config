@@ -370,7 +370,7 @@ Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 
 " Isort
-"Plug 'stsewd/isort.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'stsewd/isort.nvim', { 'do': ':UpdateRemotePlugins' }
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -624,7 +624,7 @@ let NERDTreeMapChangeRoot = "r"
 let NERDTreeMapMenu = "m"
 let NERDTreeMapToggleHidden = "zh"
 let NERDTreeIgnore = ['\.pyc$', '__pycache__', '.idea']
-let g:NERDTreeHidden=0
+let g:NERDTreeHidden=1
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
 	exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
 	exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
@@ -776,7 +776,7 @@ let g:ale_c_gcc_options="-Wall -O2"
 " === MarkdownPreview
 " ===
 let g:mkdp_auto_start = 0
-let g:mkdp_auto_close = 1
+let g:mkdp_auto_close = 0
 let g:mkdp_refresh_slow = 0
 let g:mkdp_command_for_global = 0
 let g:mkdp_open_to_the_world = 0
@@ -938,7 +938,7 @@ let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_fzf_preview = ['right:50%']
 
 "Isort
-"let g:isort_command = 'isort'
+let g:isort_command = 'isort'
 nnoremap <leader>i :Isort<CR>
 
 " ===
@@ -1169,7 +1169,8 @@ nmap <S-h> ^
 nmap <S-l> $
 
 nnoremap <LEADER>" :Pydocstring<CR>
-nnoremap <esc> :nohl<cr>
+nnoremap <esc> :nohl<cr>zz
+nnoremap <silent> <LEADER>r :Rg<CR>
 
 " ===================== End of Plugin Settings =====================
 
@@ -1183,7 +1184,6 @@ let g:python_host_prog='/usr/bin/python2'
 let g:python3_host_prog='/usr/bin/python3.6'
 "let g:python3_host_prog='/home/guang/anaconda3/envs/nvim/bin/python'
 
-let g:mkdp_browser = 'chromium'
 
 map <F5> :call CompileRunGcc()<CR>
     func! CompileRunGcc()
