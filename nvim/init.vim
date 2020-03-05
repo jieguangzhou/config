@@ -981,7 +981,7 @@ set pastetoggle=<F12>
 " ===
 " === FlyGrep
 " ===
-nnoremap <c-f> :FlyGrep<CR>
+nnoremap <c-f> :Rg<CR>
 
 
 " ===
@@ -1171,6 +1171,19 @@ nmap <S-l> $
 nnoremap <LEADER>" :Pydocstring<CR>
 nnoremap <esc> :nohl<cr>zz
 nnoremap <silent> <LEADER>r :Rg<CR>
+
+" Toggle fold
+nnoremap <CR> za
+
+" Re-select blocks after indenting in visual/select mode
+xnoremap < <gv
+xnoremap > >gv|
+
+" Use tab for indenting in visual/select mode
+xnoremap <Tab> >gv|
+xnoremap <S-Tab> <gv
+
+
 
 " ===================== End of Plugin Settings =====================
 
