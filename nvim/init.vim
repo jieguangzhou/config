@@ -434,6 +434,12 @@ let g:neomake_python_enabled_makers = ['pylint']
 " Plug 'julienr/vim-cellmode'
 
 " Markdown
+Plug 'godlygeek/tabular' "必要插件，安装在vim-markdown前面
+Plug 'plasticboy/vim-markdown'
+let g:vim_markdown_math = 1
+Plug 'mzlogin/vim-markdown-toc'
+let g:vmt_auto_update_on_save = 0
+
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 Plug 'dkarter/bullets.vim', { 'for' :['markdown', 'vim-plug'] }
@@ -958,9 +964,9 @@ noremap <LEADER>gi :FzfGitignore<CR>
 " ===
 let g:tex_flavor = "latex"
 inoremap <c-n> <nop>
-let g:UltiSnipsExpandTrigger="<c-e>"
-let g:UltiSnipsJumpForwardTrigger="<c-e>"
-let g:UltiSnipsJumpBackwardTrigger="<c-n>"
+let g:UltiSnipsExpandTrigger="<c-space>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', 'UltiSnips']
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
 
@@ -1169,7 +1175,7 @@ nmap <S-h> ^
 nmap <S-l> $
 
 nnoremap <LEADER>" :Pydocstring<CR>
-nnoremap <esc> :nohl<cr>zz
+nnoremap <><esc> :nohl<cr>zz
 nnoremap <silent> <LEADER>r :Rg<CR>
 
 " Toggle fold
