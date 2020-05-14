@@ -1205,6 +1205,9 @@ xnoremap > >gv|
 xnoremap <Tab> >gv|
 xnoremap <S-Tab> <gv
 
+nnoremap <LEADER>2 @
+noremap <LEADER>s g@iw
+
 
 
 " ===================== End of Plugin Settings =====================
