@@ -367,7 +367,7 @@ Plug 'liuchengxu/vista.vim'
 Plug 'dense-analysis/ale'
 
 " Auto Complete
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Isort
 Plug 'stsewd/isort.nvim', { 'do': ':UpdateRemotePlugins' }
