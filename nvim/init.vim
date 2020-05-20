@@ -65,7 +65,6 @@ set showcmd
 set wildmenu
 set ignorecase
 set smartcase
-set shortmess+=c
 set inccommand=split
 set ttyfast "should make scrolling faster
 set lazyredraw "same as above
@@ -690,14 +689,14 @@ autocmd BufEnter * call GetCurrentContent()
 " ==
 " == GitGutter
 " ==
-let g:gitgutter_map_keys = 0
-let g:gitgutter_override_sign_column_highlight = 0
-let g:gitgutter_preview_win_floating = 1
-autocmd BufWritePost * GitGutter
-nnoremap <LEADER>gf :GitGutterFold<CR>
-nnoremap H :GitGutterPreviewHunk<CR>
-nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
-nnoremap <LEADER>g= :GitGutterNextHunk<CR>
+" let g:gitgutter_map_keys = 0
+" let g:gitgutter_override_sign_column_highlight = 0
+" let g:gitgutter_preview_win_floating = 1
+" autocmd BufWritePost * GitGutter
+" nnoremap <LEADER>gf :GitGutterFold<CR>
+" nnoremap H :GitGutterPreviewHunk<CR>
+" nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
+" nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 
 
 " vim-cellmode
@@ -730,6 +729,7 @@ silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
 let g:coc_global_extensions = ['coc-python', 'coc-pyls', 'coc-tabnine', 'coc-vimlsp', 'coc-emmet', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-omnisharp', 'coc-snippets']
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
+nmap <leader>rn <Plug>(coc-rename)
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
@@ -745,10 +745,10 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Useful commands
 nmap <silent> <leader>y :<C-u>CocList -A --normal yank<cr>
 nmap <silent> <leader>e :<C-u>CocList -A --normal locationlist<cr>
-nmap <silent> <leader>g <Plug>(coc-definition)
-nmap <silent> <leader>d <Plug>(coc-type-definition)
-nmap <silent> <leader>i <Plug>(coc-implementation)
-nmap <silent> <leader>n <Plug>(coc-references)
+nmap <silent> ga <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gl <Plug>(coc-references)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -972,7 +972,7 @@ nnoremap R :Ranger<CR>
 " ===
 " === fzf-gitignore
 " ===
-noremap <LEADER>gi :FzfGitignore<CR>
+" noremap <LEADER>gi :FzfGitignore<CR>
 
 
 " ===
@@ -1082,45 +1082,45 @@ nnoremap <C-y> :Neoformat<CR>
 " ===
 " === OmniSharp
 " ===
-let g:OmniSharp_typeLookupInPreview = 1
-let g:omnicomplete_fetch_full_documentation = 1
-
-let g:OmniSharp_server_use_mono = 1
-let g:OmniSharp_server_stdio = 1
-let g:OmniSharp_highlight_types = 2
-let g:OmniSharp_selector_ui = 'ctrlp'
-
-autocmd Filetype cs nnoremap <buffer> gd :OmniSharpPreviewDefinition<CR>
-autocmd Filetype cs nnoremap <buffer> gr :OmniSharpFindUsages<CR>
-autocmd Filetype cs nnoremap <buffer> gy :OmniSharpTypeLookup<CR>
-autocmd Filetype cs nnoremap <buffer> ga :OmniSharpGetCodeActions<CR>
-autocmd Filetype cs nnoremap <buffer> <LEADER>rn :OmniSharpRename<CR><C-N>:res +5<CR>
-
-sign define OmniSharpCodeActions text=💡
-
-augroup OSCountCodeActions
-	autocmd!
-	autocmd FileType cs set signcolumn=yes
-	autocmd CursorHold *.cs call OSCountCodeActions()
-augroup END
-
-function! OSCountCodeActions() abort
-	if bufname('%') ==# '' || OmniSharp#FugitiveCheck() | return | endif
-	if !OmniSharp#IsServerRunning() | return | endif
-	let opts = {
-				\ 'CallbackCount': function('s:CBReturnCount'),
-				\ 'CallbackCleanup': {-> execute('sign unplace 99')}
-				\}
-	call OmniSharp#CountCodeActions(opts)
-endfunction
-
-function! s:CBReturnCount(count) abort
-	if a:count
-		let l = getpos('.')[1]
-		let f = expand('%:p')
-		execute ':sign place 99 line='.l.' name=OmniSharpCodeActions file='.f
-	endif
-endfunction
+" let g:OmniSharp_typeLookupInPreview = 1
+" let g:omnicomplete_fetch_full_documentation = 1
+"
+" let g:OmniSharp_server_use_mono = 1
+" let g:OmniSharp_server_stdio = 1
+" let g:OmniSharp_highlight_types = 2
+" let g:OmniSharp_selector_ui = 'ctrlp'
+"
+" autocmd Filetype cs nnoremap <buffer> gd :OmniSharpPreviewDefinition<CR>
+" autocmd Filetype cs nnoremap <buffer> gr :OmniSharpFindUsages<CR>
+" autocmd Filetype cs nnoremap <buffer> gy :OmniSharpTypeLookup<CR>
+" autocmd Filetype cs nnoremap <buffer> ga :OmniSharpGetCodeActions<CR>
+" autocmd Filetype cs nnoremap <buffer> <LEADER>rn :OmniSharpRename<CR><C-N>:res +5<CR>
+"
+" sign define OmniSharpCodeActions text=💡
+"
+" augroup OSCountCodeActions
+"		autocmd!
+"		autocmd FileType cs set signcolumn=yes
+"		autocmd CursorHold *.cs call OSCountCodeActions()
+" augroup END
+"
+" function! OSCountCodeActions() abort
+"		if bufname('%') ==# '' || OmniSharp#FugitiveCheck() | return | endif
+"		if !OmniSharp#IsServerRunning() | return | endif
+"		let opts = {
+"					\ 'CallbackCount': function('s:CBReturnCount'),
+"					\ 'CallbackCleanup': {-> execute('sign unplace 99')}
+"					\}
+"		call OmniSharp#CountCodeActions(opts)
+" endfunction
+"
+" function! s:CBReturnCount(count) abort
+"		if a:count
+"			let l = getpos('.')[1]
+"			let f = expand('%:p')
+"			execute ':sign place 99 line='.l.' name=OmniSharpCodeActions file='.f
+"		endif
+" endfunction
 
 
 " ===
@@ -1192,7 +1192,6 @@ nmap <S-l> $
 
 nnoremap <LEADER>" :Pydocstring<CR>
 nnoremap <><esc> :nohl<cr>zz
-nnoremap <silent> <LEADER>r :Rg<CR>
 
 " Toggle fold
 nnoremap <CR> za
