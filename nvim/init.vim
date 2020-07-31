@@ -369,7 +369,7 @@ Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Isort
-Plug 'stsewd/isort.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'fisadev/vim-isort', { 'do': ':UpdateRemotePlugins' }
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -960,7 +960,6 @@ let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_fzf_preview = ['right:50%']
 
 "Isort
-let g:isort_command = 'isort'
 nnoremap <leader>i :Isort<CR>
 
 " ===
@@ -1217,9 +1216,8 @@ noremap <LEADER>s g@iw
 exec "nohlsearch"
 
 " Open the _machine_specific.vim file if it has just been created
-let g:python_host_prog='/usr/bin/python2'
+let g:python_host_prog='/usr/bin/python2.7'
 let g:python3_host_prog='/usr/bin/python3.6'
-"let g:python3_host_prog='/home/guang/anaconda3/envs/nvim/bin/python'
 
 
 map <F5> :call CompileRunGcc()<CR>
@@ -1248,5 +1246,4 @@ elseif &filetype == 'mkd'
             exec "!firefox %.html &"
 endif
     endfunc
-
 
