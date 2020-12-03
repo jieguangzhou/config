@@ -505,6 +505,8 @@ Plug 'KabbAmine/zeavim.vim' " <LEADER>z to find doc
 "Plug 'voldikss/vim-floaterm'
 Plug 'liuchengxu/vim-clap'
 Plug 'jceb/vim-orgmode'
+Plug 'tpope/vim-speeddating'
+Plug 'majutsushi/tagbar'
 
 " Vim Applications
 Plug 'itchyny/calendar.vim'
@@ -961,6 +963,7 @@ let g:vista_fzf_preview = ['right:50%']
 
 "Isort
 nnoremap <leader>i :Isort<CR>
+let g:vim_isort_map = ''
 
 " ===
 " === Ranger.vim
